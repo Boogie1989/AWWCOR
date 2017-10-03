@@ -7,6 +7,10 @@ import { ServicesModule } from './services';
 import { ModulesModule } from './modules';
 import { AppComponent } from './app.component';
 
+import 'rxjs/add/operator/map';
+import 'rxjs/add/observable/of';
+import 'rxjs/add/operator/catch';
+
 const defaultRoute = RouterModule.forRoot([{
   path: '**',
   redirectTo: '/departments'

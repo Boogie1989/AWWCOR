@@ -4,7 +4,7 @@ import { RouterModule } from '@angular/router';
 import { EmployeesComponent } from './employees.component';
 
 const employeesRoute = RouterModule.forRoot([{
-  path: 'employees',
+  path: 'employees/:id',
   component: EmployeesComponent
 }]);
 

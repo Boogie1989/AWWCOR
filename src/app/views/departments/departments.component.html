@@ -2,3 +2,6 @@
   departments works!
   <a [routerLink]="['/employees']">employees</a>
 </p>
+<div>
+  <div *ngFor="let dep of departmentsService.departments | async" [routerLink]="['/employees', dep.id]">{{dep.id}}</div>
+</div>
