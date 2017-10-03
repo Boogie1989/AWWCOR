@@ -21,4 +21,26 @@ export class DepartmentsService {
       .subscribe(dep => this._departments.next(dep));
   }
 
+  create(fields) {
+    this.backend.createDepartment(fields)
+      .subscribe((dep: Department) => {
+        this._departments.next([...this._departments.getValue(), dep]);
+      });
+  }
+
+  remove(element) {
+    this.backend.removeDepartment(element.id)
+      .subscribe(dep => this.removeDepartment(element.id));
+  }
+
+  private removeDepartment(id) {
+    const departments = this._departments.getValue();
+    for (let i = 0; i < departments.length; i++) {
+      if (departments[i].id === id) {
+        departments.splice(i, i);
+        return this._departments.next(departments);
+      }
+    }
+  }
+
 }

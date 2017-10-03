@@ -14,7 +14,7 @@ export class BackendService extends Urls {
   }
 
   getAllDepartments(): Observable<Array<Department>> {
-    return this.http.get(this.depatmentsGetUrl())
+    return this.http.get(this.depatmentsGetPostUrl())
       .map(res => res.json())
       .map(res => res.map(d => new Department(d)))
       .do(dep => {
@@ -36,6 +36,17 @@ export class BackendService extends Urls {
       .map(res => res.map(d => new Employee(d)))
       .catch(this.errorHandler);
   }
+
+  createDepartment(fields): Observable<Department> {
+    return this.http.post(this.depatmentsGetPostUrl(), fields)
+      .map(res => new Department(res.json()));
+  }
+
+  removeDepartment(id) {
+    return this.http.delete(this.departmentGetDeleteUrl(id))
+      .map(res => res.json());
+  }
+
 
   private errorHandler(error) {
     console.log(error);

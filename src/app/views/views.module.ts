@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { DepartmentsModule } from './departments';
 import { DepartmentModule } from './department';
 
+
 @NgModule({
   imports: [
     CommonModule,

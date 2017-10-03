@@ -1,6 +1,6 @@
 export class Urls {
   protected base = 'http://ebsexpress-env.us-west-2.elasticbeanstalk.com';
-  protected depatmentsGetUrl(): string {
+  protected depatmentsGetPostUrl(): string {
     return `${this.base}/users/departments/`;
   }
   protected usersCountInDepartmentGetUrl(departmentId: string | number): string {
@@ -12,7 +12,7 @@ export class Urls {
   protected employeeDeleteUrl(userId: string | number) {
     return `${this.base}/users/employees/${userId}`;
   }
-  protected departmentGetDeleteUrlUrl(departmentId: string | number) {
+  protected departmentGetDeleteUrl(departmentId: string | number) {
     return `${this.base}/users/departments/${departmentId}`;
   }
 

@@ -1,9 +1,48 @@
-<p>
+<!-- <p>
   departments works!
 </p>
 <div>
   <div *ngFor="let dep of departmentsService.departments | async">
     <a [routerLink]="['/department', dep.id]">{{dep.id}} -- {{dep.count}}</a>
   </div>
-</div>
+</div> -->
 
+
+
+
+
+<div class="example-container mat-elevation-z8">
+  <md-table #table [dataSource]="dataSource">
+
+    <ng-container mdColumnDef="id">
+      <md-header-cell *mdHeaderCellDef> id </md-header-cell>
+      <md-cell *mdCellDef="let element" [routerLink]="['/department', element.id]">
+        <a [routerLink]="['/department', element.id]" [routerLink]="['/${route-link}']">{{element.id}}</a>
+      </md-cell>
+    </ng-container>
+
+    <ng-container mdColumnDef="name">
+      <md-header-cell *mdHeaderCellDef> Name </md-header-cell>
+      <md-cell *mdCellDef="let element"><a [routerLink]="['/department', element.id]" [routerLink]="['/${route-link}']">{{element.name}}</a> </md-cell>
+    </ng-container>
+
+
+    <ng-container mdColumnDef="description">
+      <md-header-cell *mdHeaderCellDef> Description </md-header-cell>
+      <md-cell *mdCellDef="let element" [routerLink]="['/department', element.id]">
+        <a [routerLink]="['/department', element.id]" [routerLink]="['/${route-link}']">{{element.description}}</a>
+      </md-cell>
+    </ng-container>
+
+    <ng-container mdColumnDef="remove">
+      <md-header-cell *mdHeaderCellDef> Remove </md-header-cell>
+      <md-cell *mdCellDef="let element">
+        <button (click)="departmentsService.remove(element)" md-button>remove</button>
+      </md-cell>
+    </ng-container>
+
+    <md-header-row *mdHeaderRowDef="dataSource.tableColumns"></md-header-row>
+    <md-row *mdRowDef="let row; columns: dataSource.tableColumns;"></md-row>
+  </md-table>
+  <button (click)="openDialog()" md-button>Create new Department</button>
+</div>
