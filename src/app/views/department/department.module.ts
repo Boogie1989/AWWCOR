@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { EmployeesComponent } from './employees.component';
+import { DepartmentComponent } from './department.component';
 
 const employeesRoute = RouterModule.forRoot([{
-  path: 'employees/:id',
-  component: EmployeesComponent
+  path: 'department/:id',
+  component: DepartmentComponent
 }]);
 
 @NgModule({
@@ -13,6 +13,6 @@ const employeesRoute = RouterModule.forRoot([{
     CommonModule,
     employeesRoute
   ],
-  declarations: [EmployeesComponent]
+  declarations: [DepartmentComponent]
 })
-export class EmployeesModule { }
+export class DepartmentModule { }

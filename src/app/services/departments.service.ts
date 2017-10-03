@@ -12,13 +12,12 @@ export class DepartmentsService {
     private backend: BackendService
   ) { }
 
-
   get departments() {
     return this._departments.asObservable();
   }
 
-  getDepartments() {
-    this.backend.getDepartments()
+  getAllDepartments() {
+    this.backend.getAllDepartments()
       .subscribe(dep => this._departments.next(dep));
   }
 
