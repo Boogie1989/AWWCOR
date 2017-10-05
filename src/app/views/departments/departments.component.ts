@@ -14,7 +14,7 @@ export class DepartmentsComponent implements OnInit {
   dataSource = new DepartmentsDataSource();
 
   constructor(
-    private departmentsService: DepartmentsService
+    public departmentsService: DepartmentsService
   ) {
     this.dataSource.data = this.departmentsService.departments;
   }

@@ -18,7 +18,7 @@ export class DepartmentComponent implements OnInit, OnDestroy {
   departmentId: number;
 
   constructor(
-    private employeesService: EmployeesService,
+    public employeesService: EmployeesService,
     private route: ActivatedRoute
   ) {
     this.dataSource.data = this.employeesService.selectedEmployees;
@@ -28,16 +28,22 @@ export class DepartmentComponent implements OnInit, OnDestroy {
     this.route.params.subscribe(params => {
       if (params.id) {
         this.departmentId = Number(params.id);
+        this.findDepartmentName(this.departmentId);
         const sub: Subscription = this.employeesService.allEmployees
           .subscribe(emps => {
-            const filtered = this.employeesService.filterSelectedEmployee(emps, this.departmentId);
-            if (filtered.length) {
-              this.departmentName = filtered[0].departmentName;
-            }
+            this.employeesService.filterSelectedEmployee(emps, this.departmentId);
           });
         this.subscriptions.push(sub);
       }
     });
+  }
+
+  private findDepartmentName(departmentId) {
+    const sub = this.employeesService.getDepartmentByIdAsync(departmentId)
+      .subscribe(dep => {
+        this.departmentName = dep.name;
+      });
+    this.subscription.push(sub);
   }
 
   ngOnDestroy() {

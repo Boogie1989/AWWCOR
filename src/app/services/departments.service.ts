@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Observable } from 'rxjs/Observable';
 import { BackendService } from './backend.service';
 import { Department } from '../models';
 import { MdDialog, MdDialogRef, MD_DIALOG_DATA } from '@angular/material';
@@ -86,6 +87,17 @@ export class DepartmentsService {
         return this._departments.next(departments);
       }
     }
+  }
+
+  getDepartmentAsync(departmentId: number) {
+    return Observable.create(observer => {
+      this._departments.subscribe(deps => {
+        const department = this.getDepartmentById(departmentId);
+        if (department) {
+          observer.next(department);
+        }
+      });
+    });
   }
 
   private removeDepartment(id) {

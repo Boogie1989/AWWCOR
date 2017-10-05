@@ -22,8 +22,6 @@ export class CreateComponent implements OnInit {
   }
 
   createForm() {
-    console.dir(Validators);
-
     let form = {};
     if (this.data.department) {
       form = {

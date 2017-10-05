@@ -27,41 +27,45 @@ export class BackendService extends Urls {
             error => console.log(error));
         });
       })
-      .catch(this.errorHandler);
+      .catch(this.errorHandler([]));
   }
 
   getAllEmployees(): Observable<Array<Employee>> {
     return this.http.get(this.employessGetPostUrl())
       .map(res => res.json())
       .map(res => res.map(d => new Employee(d)))
-      .catch(this.errorHandler);
+      .catch(this.errorHandler([]));
   }
 
   createDepartment(fields): Observable<Department> {
     return this.http.post(this.depatmentsGetPostUrl(), fields)
-      .map(res => new Department(res.json()));
+      .map(res => new Department(res.json()))
+      .catch(this.errorHandler({}));
   }
 
   removeDepartment(id) {
     return this.http.delete(this.departmentGetDeleteUrl(id))
-      .map(res => res.json());
+      .map(res => res.json())
+      .catch(this.errorHandler(0));
   }
 
   createEmployee(newEmployee: IEmployee) {
     return this.http.post(this.employessGetPostUrl(), newEmployee)
-      .map(res => res.json());
-    // console.log(departmentId, '    employee');
+      .map(res => res.json())
+      .catch(this.errorHandler({}));
   }
 
   removeEmployee(id: number) {
     return this.http.delete(this.employeeDeleteUrl(id))
-      .map(res => res.json());
+      .map(res => res.json())
+      .catch(this.errorHandler(0));
   }
 
 
-  private errorHandler(error) {
-    console.log(error);
-    return Observable.of([]);
+  private errorHandler(valueForReturn) {
+    return function (error) {
+      return Observable.of(valueForReturn);
+    };
   }
 
 }

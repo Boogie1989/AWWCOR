@@ -1,3 +1,4 @@
+import { Department } from '../models/department';
 import { Injectable } from '@angular/core';
 import { BackendService } from './backend.service';
 import { Subject } from 'rxjs/Subject';
@@ -6,7 +7,7 @@ import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import { Employee, IEmployee } from '../models';
 import { MdDialog, MdDialogRef, MD_DIALOG_DATA } from '@angular/material';
-import {  CreateComponent } from '../modules';
+import { CreateComponent } from '../modules';
 import { DepartmentsService } from './departments.service';
 
 @Injectable()
@@ -48,7 +49,6 @@ export class EmployeesService {
   addNewEmployee(departmentId: number) {
 
     const department = this.departmentsService.getDepartmentById(departmentId);
-
     const dialogRef = this.dialog.open(this.createComponent, {
       width: '500px',
       data: {
@@ -97,6 +97,10 @@ export class EmployeesService {
     removeAndEmmit(this._allEmployees.getValue(), id, this._allEmployees);
     removeAndEmmit(this._selectedEmployees.getValue(), id, this._selectedEmployees);
 
+  }
+
+  getDepartmentByIdAsync(departmentId): Observable<Department> {
+    return this.departmentsService.getDepartmentAsync(departmentId);
   }
 
 }
