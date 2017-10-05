@@ -3,7 +3,44 @@
 </div>
 <div>
   <h3>{{departmentName}} department employees</h3>
-  <div *ngFor="let emp of employeesService.selectedEmployees | async">
-    {{emp.firstName}} {{emp.lastName}}
-  </div>
+</div>
+<div class="example-container mat-elevation-z8">
+  <md-table #table [dataSource]="dataSource">
+
+    <ng-container mdColumnDef="id">
+      <md-header-cell *mdHeaderCellDef> Id </md-header-cell>
+      <md-cell *mdCellDef="let element" [routerLink]="['/department', element.id]">
+        {{element.id}}
+      </md-cell>
+    </ng-container>
+
+    <ng-container mdColumnDef="firstName">
+      <md-header-cell *mdHeaderCellDef> First Name </md-header-cell>
+      <md-cell *mdCellDef="let element">{{element.firstName}}</md-cell>
+    </ng-container>
+
+
+    <ng-container mdColumnDef="lastName">
+      <md-header-cell *mdHeaderCellDef> Last Name </md-header-cell>
+      <md-cell *mdCellDef="let element">
+        {{element.lastName}}
+      </md-cell>
+    </ng-container>
+
+    <ng-container mdColumnDef="phone">
+      <md-header-cell *mdHeaderCellDef> Phone </md-header-cell>
+      <md-cell *mdCellDef="let element">
+        {{element.phone}} </md-cell>
+    </ng-container>
+
+    <ng-container mdColumnDef="salary">
+      <md-header-cell *mdHeaderCellDef> Salary </md-header-cell>
+      <md-cell *mdCellDef="let element">
+        {{element.salary}} </md-cell>
+    </ng-container>
+
+
+    <md-header-row *mdHeaderRowDef="dataSource.tableColumns"></md-header-row>
+    <md-row *mdRowDef="let row; columns: dataSource.tableColumns;"></md-row>
+  </md-table>
 </div>

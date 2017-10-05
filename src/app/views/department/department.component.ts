@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { EmployeesService } from '../../services';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
+import { DepartmentDataSource } from './dataSource';
 
 @Component({
   selector: 'app-department',
@@ -10,6 +11,7 @@ import { Subscription } from 'rxjs/Subscription';
 })
 export class DepartmentComponent implements OnInit, OnDestroy {
 
+  dataSource = new DepartmentDataSource();
   subscriptions: Array<Subscription> = [];
   subscription: Array<Subscription> = [];
   departmentName: string;
@@ -17,7 +19,9 @@ export class DepartmentComponent implements OnInit, OnDestroy {
   constructor(
     private employeesService: EmployeesService,
     private route: ActivatedRoute
-  ) { }
+  ) {
+    this.dataSource.data = this.employeesService.selectedEmployees;
+  }
 
   ngOnInit() {
     this.route.params.subscribe(params => {

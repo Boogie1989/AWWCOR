@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { DepartmentComponent } from './department.component';
+import { MatTableModule } from '@angular/material';
+import { CdkTableModule } from '@angular/cdk/table';
 
 const employeesRoute = RouterModule.forRoot([{
   path: 'department/:id',
@@ -11,7 +13,9 @@ const employeesRoute = RouterModule.forRoot([{
 @NgModule({
   imports: [
     CommonModule,
-    employeesRoute
+    employeesRoute,
+    MatTableModule,
+    CdkTableModule
   ],
   declarations: [DepartmentComponent]
 })

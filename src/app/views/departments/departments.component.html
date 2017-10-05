@@ -1,21 +1,12 @@
-<!-- <p>
-  departments works!
-</p>
 <div>
-  <div *ngFor="let dep of departmentsService.departments | async">
-    <a [routerLink]="['/department', dep.id]">{{dep.id}} -- {{dep.count}}</a>
-  </div>
-</div> -->
-
-
-
-
+  <h3>Departments list</h3>
+</div>
 
 <div class="example-container mat-elevation-z8">
   <md-table #table [dataSource]="dataSource">
 
     <ng-container mdColumnDef="id">
-      <md-header-cell *mdHeaderCellDef> id </md-header-cell>
+      <md-header-cell *mdHeaderCellDef> Id </md-header-cell>
       <md-cell *mdCellDef="let element" [routerLink]="['/department', element.id]">
         <a [routerLink]="['/department', element.id]" [routerLink]="['/${route-link}']">{{element.id}}</a>
       </md-cell>
