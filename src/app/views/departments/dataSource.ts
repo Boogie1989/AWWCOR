@@ -3,7 +3,7 @@ import { DataSource } from '@angular/cdk/collections';
 import { Observable } from 'rxjs/Observable';
 
 export class DepartmentsDataSource extends DataSource<any> {
-  tableColumns = ['id', 'name', 'description', 'remove'];
+  tableColumns = ['id', 'name', 'description', 'details', 'remove'];
   private _data: Observable<any>;
 
   connect(): Observable<any> {

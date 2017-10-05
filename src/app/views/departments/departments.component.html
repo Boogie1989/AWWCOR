@@ -34,6 +34,13 @@
       </md-cell>
     </ng-container>
 
+    <ng-container mdColumnDef="details">
+      <md-header-cell *mdHeaderCellDef> Details </md-header-cell>
+      <md-cell *mdCellDef="let element">
+        <button (click)="departmentsService.showDetails(element)" md-button>details</button>
+      </md-cell>
+    </ng-container>
+
     <ng-container mdColumnDef="remove">
       <md-header-cell *mdHeaderCellDef> Remove </md-header-cell>
       <md-cell *mdCellDef="let element">
@@ -41,8 +48,9 @@
       </md-cell>
     </ng-container>
 
+
     <md-header-row *mdHeaderRowDef="dataSource.tableColumns"></md-header-row>
     <md-row *mdRowDef="let row; columns: dataSource.tableColumns;"></md-row>
   </md-table>
-  <button (click)="openDialog()" md-button>Create new Department</button>
+  <button (click)="departmentsService.openDialog()" md-button>Create new Department</button>
 </div>

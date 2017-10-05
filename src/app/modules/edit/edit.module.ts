@@ -13,6 +13,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatInputModule
   ],
   declarations: [EditComponent],
+  entryComponents: [
+    EditComponent
+  ],
   exports: [EditComponent]
 })
 export class EditModule { }

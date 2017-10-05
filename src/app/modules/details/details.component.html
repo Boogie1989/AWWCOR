@@ -1,0 +1,10 @@
+<h1 md-dialog-title>{{data.title}}</h1>
+<div md-dialog-content>
+  <md-card><pre>id:               <b>{{data.department.id}}</b></pre></md-card>
+  <md-card><pre>name:             <b>{{data.department.name}}</b></pre></md-card>
+  <md-card><pre>description:      <b>{{data.department.description}}</b></pre></md-card>
+</div>
+
+<div md-dialog-actions>
+  <button md-button (click)="dialogRef.close()" tabindex="2">Close</button>
+</div>

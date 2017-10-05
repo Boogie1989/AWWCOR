@@ -2,14 +2,19 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { BackendService } from './backend.service';
 import { Department } from '../models';
+import { MdDialog, MdDialogRef, MD_DIALOG_DATA } from '@angular/material';
+import { EditComponent, DetailsComponent } from '../modules';
 
 @Injectable()
 export class DepartmentsService {
 
   private _departments: BehaviorSubject<Array<Department>> = new BehaviorSubject([]);
+  private editComponent = EditComponent;
+  private detailsComponent = DetailsComponent;
 
   constructor(
-    private backend: BackendService
+    private backend: BackendService,
+    public dialog: MdDialog
   ) { }
 
   get departments() {
@@ -31,6 +36,44 @@ export class DepartmentsService {
   remove(element) {
     this.backend.removeDepartment(element.id)
       .subscribe(dep => this.removeDepartment(element.id));
+  }
+
+  showDetails(department) {
+    const dialogRef = this.dialog.open(this.detailsComponent, {
+      width: '500px',
+      data: {
+        title: 'Department details',
+        department
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.create(result);
+      }
+    });
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(this.editComponent, {
+      width: '500px',
+      data: {
+        fieldsForEdit: [{
+          name: 'name',
+          description: 'Enter department name'
+        }, {
+          name: 'description',
+          description: 'Enter description for department'
+        }],
+        title: 'Create new Department'
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.create(result);
+      }
+    });
   }
 
   private removeDepartment(id) {
