@@ -12,6 +12,8 @@ export class DepartmentComponent implements OnInit, OnDestroy {
 
   subscriptions: Array<Subscription> = [];
   subscription: Array<Subscription> = [];
+  departmentName: string;
+
   constructor(
     private employeesService: EmployeesService,
     private route: ActivatedRoute
@@ -21,7 +23,12 @@ export class DepartmentComponent implements OnInit, OnDestroy {
     this.route.params.subscribe(params => {
       if (params.id) {
         const sub: Subscription = this.employeesService.allEmployees
-          .subscribe(emps => this.employeesService.filterSelectedEmployee(emps, Number(params.id)));
+          .subscribe(emps => {
+            const filtered = this.employeesService.filterSelectedEmployee(emps, Number(params.id));
+            if (filtered.length) {
+              this.departmentName = filtered[0].departmentName;
+            }
+          });
         this.subscriptions.push(sub);
       }
     });
