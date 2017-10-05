@@ -1,5 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MdDialog, MdDialogRef, MD_DIALOG_DATA } from '@angular/material';
+import { MdDialog, MdDialogRef, MD_DIALOG_DATA, MdSnackBar } from '@angular/material';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-create',
@@ -8,24 +9,54 @@ import { MdDialog, MdDialogRef, MD_DIALOG_DATA } from '@angular/material';
 })
 export class CreateComponent implements OnInit {
 
-  form = {};
+  form: FormGroup;
 
   constructor(
     public dialogRef: MdDialogRef<CreateComponent>,
-    @Inject(MD_DIALOG_DATA) public data: any) { }
+    @Inject(MD_DIALOG_DATA) public data: any,
+    private fb: FormBuilder,
+    private snackBar: MdSnackBar) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.createForm();
+  }
 
-  onClick(type: 'ok' | 'canvel') {
-    if (type === 'ok') {
+  createForm() {
+    console.dir(Validators);
+
+    let form = {};
+    if (this.data.department) {
+      form = {
+        name: ['', Validators.required],
+        description: ['', Validators.required]
+      };
+    } else if (this.data.employee) {
+      form = {
+        firstName: ['', Validators.required],
+        lastName: ['', Validators.required],
+        phone: [null, Validators.required],
+        salary: [null, Validators.required]
+      };
+    }
+    this.form = this.fb.group(form);
+  }
+
+  onSubmit(value) {
+    if (this.form.valid) {
       if (this.data.form) {
-        this.form = Object.assign(this.form, this.data.form);
+        value = Object.assign(value, this.data.form);
       }
-      this.dialogRef.close(this.form);
-    } else {
-      this.dialogRef.close();
+      return this.dialogRef.close(value);
     }
 
+    this.snackBar.open('All fields are required!', 'Error', {
+      duration: 1500,
+    });
+
+  }
+
+  close() {
+    this.dialogRef.close();
   }
 
 }

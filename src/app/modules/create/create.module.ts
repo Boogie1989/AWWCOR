@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CreateComponent } from './create.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatFormFieldModule, MatButtonModule, MatInputModule } from '@angular/material';
+import { MatFormFieldModule, MatButtonModule, MatInputModule, MatSnackBarModule } from '@angular/material';
 
 @NgModule({
   imports: [
@@ -11,7 +11,8 @@ import { MatFormFieldModule, MatButtonModule, MatInputModule } from '@angular/ma
     MatButtonModule,
     FormsModule,
     ReactiveFormsModule,
-    MatInputModule
+    MatInputModule,
+    MatSnackBarModule
   ],
   declarations: [CreateComponent],
   exports: [CreateComponent],

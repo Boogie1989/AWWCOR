@@ -1,56 +1,58 @@
 <h1 md-dialog-title>{{data.title}}</h1>
 <div md-dialog-content>
   <!-- <div *ngFor="let field of data.fieldsForCreate"> -->
-  <div *ngIf="data.department">
+  <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+    <div *ngIf="data.department">
 
-    <div>
-      <md-form-field>
-        <span>Enter department name</span>
-        <input mdInput tabindex="1" [(ngModel)]="form.name">
-      </md-form-field>
+      <div>
+        <md-form-field>
+          <span>Enter department name</span>
+          <input mdInput tabindex="1" formControlName="name">
+        </md-form-field>
+      </div>
+
+      <div>
+        <md-form-field>
+          <span>Enter description for department</span>
+          <input mdInput tabindex="1" formControlName="description">
+        </md-form-field>
+      </div>
+
     </div>
+    <div *ngIf="data.employee">
 
-    <div>
-      <md-form-field>
-        <span>Enter description for department</span>
-        <input mdInput tabindex="1" [(ngModel)]="form.description">
-      </md-form-field>
+      <div>
+        <md-form-field>
+          <span>Enter employee first name</span>
+          <input mdInput tabindex="1" formControlName="firstName">
+        </md-form-field>
+      </div>
+
+      <div>
+        <md-form-field>
+          <span>Enter employee for second name</span>
+          <input mdInput tabindex="1" formControlName="lastName">
+        </md-form-field>
+      </div>
+
+      <div>
+        <md-form-field>
+          <span>Enter employee phone</span>
+          <input mdInput tabindex="1" formControlName="phone">
+        </md-form-field>
+      </div>
+
+      <div>
+        <md-form-field>
+          <span>Enter employee salary</span>
+          <input mdInput tabindex="1" formControlName="salary">
+        </md-form-field>
+      </div>
+
     </div>
-
-  </div>
-  <div *ngIf="data.employee">
-
-    <div>
-      <md-form-field>
-        <span>Enter department name</span>
-        <input mdInput tabindex="1" [(ngModel)]="form.firstName">
-      </md-form-field>
+    <div md-dialog-actions>
+      <button md-button tabindex="2">Ok</button>
+      <button md-button (click)="close()" tabindex="-1" type="button">No Thanks</button>
     </div>
-
-    <div>
-      <md-form-field>
-        <span>Enter description for department</span>
-        <input mdInput tabindex="1" [(ngModel)]="form.lastName">
-      </md-form-field>
-    </div>
-
-    <div>
-      <md-form-field>
-        <span>Enter department name</span>
-        <input mdInput tabindex="1" [(ngModel)]="form.phone">
-      </md-form-field>
-    </div>
-
-    <div>
-      <md-form-field>
-        <span>Enter description for department</span>
-        <input mdInput tabindex="1" [(ngModel)]="form.salary">
-      </md-form-field>
-    </div>
-
-  </div>
-</div>
-<div md-dialog-actions>
-  <button md-button (click)="onClick('ok')" tabindex="2">Ok</button>
-  <button md-button (click)="onClick('close')" tabindex="-1">No Thanks</button>
+  </form>
 </div>
