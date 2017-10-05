@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import { Department, Employee } from '../models';
+import { Department, Employee, IEmployee } from '../models';
 import { Urls } from '../config';
 
 @Injectable()
@@ -31,7 +31,7 @@ export class BackendService extends Urls {
   }
 
   getAllEmployees(): Observable<Array<Employee>> {
-    return this.http.get(this.employessGetUrl())
+    return this.http.get(this.employessGetPostUrl())
       .map(res => res.json())
       .map(res => res.map(d => new Employee(d)))
       .catch(this.errorHandler);
@@ -44,6 +44,17 @@ export class BackendService extends Urls {
 
   removeDepartment(id) {
     return this.http.delete(this.departmentGetDeleteUrl(id))
+      .map(res => res.json());
+  }
+
+  createEmployee(newEmployee: IEmployee) {
+    return this.http.post(this.employessGetPostUrl(), newEmployee)
+      .map(res => res.json());
+    // console.log(departmentId, '    employee');
+  }
+
+  removeEmployee(id: number) {
+    return this.http.delete(this.employeeDeleteUrl(id))
       .map(res => res.json());
   }
 

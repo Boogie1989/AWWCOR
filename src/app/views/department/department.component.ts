@@ -15,6 +15,7 @@ export class DepartmentComponent implements OnInit, OnDestroy {
   subscriptions: Array<Subscription> = [];
   subscription: Array<Subscription> = [];
   departmentName: string;
+  departmentId: number;
 
   constructor(
     private employeesService: EmployeesService,
@@ -26,9 +27,10 @@ export class DepartmentComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.route.params.subscribe(params => {
       if (params.id) {
+        this.departmentId = Number(params.id);
         const sub: Subscription = this.employeesService.allEmployees
           .subscribe(emps => {
-            const filtered = this.employeesService.filterSelectedEmployee(emps, Number(params.id));
+            const filtered = this.employeesService.filterSelectedEmployee(emps, this.departmentId);
             if (filtered.length) {
               this.departmentName = filtered[0].departmentName;
             }

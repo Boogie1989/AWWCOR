@@ -4,7 +4,7 @@ import { RouterModule } from '@angular/router';
 import { DepartmentsComponent } from './departments.component';
 import { MatTableModule, MatButtonModule, MatDialogModule } from '@angular/material';
 import { CdkTableModule } from '@angular/cdk/table';
-import { EditModule, DetailsModule } from '../../modules';
+import { DetailsModule, CreateModule } from '../../modules';
 
 const departmentsRoute = RouterModule.forRoot([{
   path: 'departments',
@@ -18,7 +18,7 @@ const departmentsRoute = RouterModule.forRoot([{
     CdkTableModule,
     MatButtonModule,
     MatDialogModule,
-    EditModule,
+    CreateModule,
     DetailsModule,
     departmentsRoute
   ],

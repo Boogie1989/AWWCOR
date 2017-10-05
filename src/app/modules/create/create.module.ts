@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { EditComponent } from './edit.component';
-import { MatFormFieldModule, MatButtonModule, MatInputModule } from '@angular/material';
+import { CreateComponent } from './create.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule, MatButtonModule, MatInputModule } from '@angular/material';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -12,10 +13,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule,
     MatInputModule
   ],
-  declarations: [EditComponent],
+  declarations: [CreateComponent],
+  exports: [CreateComponent],
   entryComponents: [
-    EditComponent
+    CreateComponent
   ],
-  exports: [EditComponent]
 })
-export class EditModule { }
+export class CreateModule { }

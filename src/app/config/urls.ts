@@ -6,7 +6,7 @@ export class Urls {
   protected usersCountInDepartmentGetUrl(departmentId: string | number): string {
     return `${this.base}/users/employees/count/${departmentId}`;
   }
-  protected employessGetUrl(): string {
+  protected employessGetPostUrl(): string {
     return `${this.base}/users/employees`;
   }
   protected employeeDeleteUrl(userId: string | number) {

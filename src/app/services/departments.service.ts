@@ -3,13 +3,13 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { BackendService } from './backend.service';
 import { Department } from '../models';
 import { MdDialog, MdDialogRef, MD_DIALOG_DATA } from '@angular/material';
-import { EditComponent, DetailsComponent } from '../modules';
+import { DetailsComponent, CreateComponent } from '../modules';
 
 @Injectable()
 export class DepartmentsService {
 
   private _departments: BehaviorSubject<Array<Department>> = new BehaviorSubject([]);
-  private editComponent = EditComponent;
+  private createComponent = CreateComponent;
   private detailsComponent = DetailsComponent;
 
   constructor(
@@ -55,16 +55,10 @@ export class DepartmentsService {
   }
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(this.editComponent, {
+    const dialogRef = this.dialog.open(this.createComponent, {
       width: '500px',
       data: {
-        fieldsForEdit: [{
-          name: 'name',
-          description: 'Enter department name'
-        }, {
-          name: 'description',
-          description: 'Enter description for department'
-        }],
+        department: true,
         title: 'Create new Department'
       }
     });
@@ -74,6 +68,24 @@ export class DepartmentsService {
         this.create(result);
       }
     });
+  }
+
+  getDepartmentById(departmentId: number) {
+    const departments = this._departments.getValue();
+    return departments.find(d => d.id === departmentId);
+  }
+
+  recountEmployees(departmentId: number, recount: number) {
+    const departments = this._departments.getValue();
+    for (let i = 0; i < departments.length; i++) {
+      if (departments[i].id === departmentId) {
+        if (!departments[i].count) {
+          departments[i].count = 0;
+        }
+        departments[i].count += recount;
+        return this._departments.next(departments);
+      }
+    }
   }
 
   private removeDepartment(id) {

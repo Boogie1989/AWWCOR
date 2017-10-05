@@ -39,8 +39,16 @@
         {{element.salary}} </md-cell>
     </ng-container>
 
+    <ng-container mdColumnDef="remove">
+      <md-header-cell *mdHeaderCellDef> Remove </md-header-cell>
+      <md-cell *mdCellDef="let element">
+        <button (click)="employeesService.remove(element)" md-button>remove</button>
+      </md-cell>
+    </ng-container>
+
 
     <md-header-row *mdHeaderRowDef="dataSource.tableColumns"></md-header-row>
     <md-row *mdRowDef="let row; columns: dataSource.tableColumns;"></md-row>
   </md-table>
+  <button (click)="employeesService.addNewEmployee(departmentId)" md-button>Create new Employee</button>
 </div>
